@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اريج نينوى للتجارة العامة محدودة المسؤولية</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .countdown {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            animation: fadeIn 2s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .countdown h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .countdown p {
+            font-size: 1.5em;
+            margin: 10px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop>
+        <source src="background.mp4" type="video/mp4">
+        متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+    <div class="countdown">
+        <h1>قريباً في اريج نينوى للتجارة العامة</h1>
+        <p id="timer"></p>
+    </div>
+    <script>
+        const countdownDate = new Date();
+        countdownDate.setDate(countdownDate.getDate() + 20);
+
+        const timerElement = document.getElementById("timer");
+
+        const updateTimer = () => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            timerElement.innerHTML = `${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
+            
+            if (distance < 0) {
+                clearInterval(x);
+                timerElement.innerHTML = "انتهى العد التنازلي";
+            }
+        };
+
+        const x = setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
